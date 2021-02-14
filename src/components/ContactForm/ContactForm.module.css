@@ -1,0 +1,29 @@
+.form {
+  background-color: whitesmoke;
+  padding: 15px;
+}
+
+.label {
+  cursor: pointer;
+}
+
+.input {
+  display: flex;
+}
+
+.button {
+  display: flex;
+  margin-top: 25px;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 10px 15px;
+  font-weight: 700;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 1px 2px 2px 0 rgba(0 0 0 / 0.5);
+  transition: box-shadow 250ms linear;
+}

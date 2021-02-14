@@ -1,0 +1,31 @@
+.list {
+  color: black;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.name {
+  margin-top: 5px;
+}
+.number {
+  margin-top: 5px;
+}
+
+.button {
+  margin-right: 25px;
+  margin-left: 25px;
+  padding: 10px 15px;
+  font-weight: 700;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 1px 2px 2px 0 rgba(0 0 0 / 0.5);
+  transition: box-shadow 250ms linear;
+}
