@@ -1,53 +1,44 @@
 .list {
-  color: black;
+  list-style: none;
+  margin-top: 1000px;
+  padding: 10px 0 0;
+  width: 520px;
+  position: absolute;
 }
 
 .item {
+  font-size: 20px;
+  line-height: 1.5;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin: 5px 0;
+  height: 40px;
   display: flex;
   align-items: center;
-  padding: 20px;
+  justify-content: space-between;
 }
 
 .name {
-  margin-top: 5px;
+  width: 400px;
+  justify-content: space-between;
 }
+
 .number {
-  margin-top: 5px;
+  width: 400px;
+  justify-content: space-between;
 }
 
 .button {
-  margin-right: 25px;
-  margin-left: 25px;
-  padding: 10px 15px;
-  font-weight: 700;
-  background-color: white;
-  color: black;
-  border: none;
-  border-radius: 3px;
+  margin-left: 10px;
+  border-radius: 4px;
   outline: none;
-  cursor: pointer;
-  box-shadow: 1px 2px 2px 0 rgba(0 0 0 / 0.5);
-  transition: box-shadow 250ms linear;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  background-color: red;
 }
-
-.enter {
-  opacity: 0;
-  transform: translateX(-100%);
-}
-
-.enter-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: all 250ms linear;
-}
-
-.exit {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.exit-active {
-  opacity: 0;
-  transform: translateX(-100%);
-  transition: all 250ms linear;
+.button:hover {
+  background-color: #df0101;
 }

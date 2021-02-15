@@ -1,0 +1,12 @@
+div {
+  width: 260px;
+  height: 40px;
+  color: white;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
