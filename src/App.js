@@ -35,14 +35,14 @@ class App extends Component {
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
     }
-  }
+  };
   
   componentDidUpdate(prevState) {
     const { contacts } = this.state;
     if (contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(contacts));
     }
-  }
+  };
 
   changeFilter = e => {
     this.setState({ filter: e.currentTarget.value });
@@ -63,9 +63,15 @@ class App extends Component {
       .includes(name);
 
     if (searchSameName) {
-      alert(`${name} is already in contacts`);
-    } else if (name.length === 0) {
-      alert("Fields must be filled!");
+     this.setState({
+        isVisible: true,
+        message: "Contact already exists!",
+      });
+      setTimeout(() => {
+        this.setState({
+          ...INITIAL_STATE,
+        });
+      }, 1500);
     } else {
       const contact = {
         id: shortid.generate(),
@@ -92,14 +98,10 @@ class App extends Component {
     );
 
     return(
-      <div>
+      <div className="app">
         <CSSTransition in timeout={500} classNames={titleTransition} appear>
-          <h1>Phonebook</h1>
+          <h1 className="title">Phonebook</h1>
         </CSSTransition>
-        <ContactForm
-          onSubmit={this.addContact}
-          onSetMessage={this.setMessage}
-        />
         <CSSTransition
           in={isVisible}
           timeout={250}
@@ -108,6 +110,10 @@ class App extends Component {
         >
           <Alert message={message} />
         </CSSTransition>
+        <ContactForm
+          onSubmit={this.addContact}
+          onSetMessage={this.setMessage}
+        />
         <CSSTransition in={contacts.length > 1}
           timeout={250}
           classNames={popTransition}

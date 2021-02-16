@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import s from './Alert.module.css';
 
 const Alert = ({ message }) => (
-    <div className={s}>
+    <div className={s.alert}>
         {message}
     </div>
 );

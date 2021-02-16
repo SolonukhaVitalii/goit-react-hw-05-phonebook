@@ -40,7 +40,7 @@ class ContactForm extends Component {
               id={this.nameInputId}
             /> 
         </label>
-        <label htmlFor={this.numberInputId}>
+        <label htmlFor={this.numberInputId} className={s.label}>
             Number <input className={s.input}
               type="text"
               name="number"

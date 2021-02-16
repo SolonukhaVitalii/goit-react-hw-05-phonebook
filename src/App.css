@@ -1,9 +1,10 @@
-div {
-  width: 550px;
+.app {
+  width: 600px;
   margin: 0;
-  position: relative;
+  padding: 15px 15px;
 }
 
-h1 {
+.title {
   color: #1507ad;
+  font-size: 50px;
 }

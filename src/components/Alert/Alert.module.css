@@ -1,12 +1,9 @@
-div {
-  width: 260px;
-  height: 40px;
+.alert {
+  width: 300px;
+  height: 80px;
   color: white;
-  background-color: red;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  right: 0;
+  background-color: #ff5e00;
+  position: static;
+  border-radius: 4px;
+  text-align: center;
 }
