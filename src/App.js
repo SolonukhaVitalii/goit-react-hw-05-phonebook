@@ -29,23 +29,17 @@ class App extends Component {
   };
   
   componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
-    
+    const parsedContacts= localStorage.getItem('contacts');
     if (parsedContacts) {
-      this.setState({ contacts: parsedContacts });
+      this.setState({ contacts: JSON.parse(parsedContacts) });
     }
   };
   
   componentDidUpdate(prevState) {
     const { contacts } = this.state;
-    if (contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(contacts));
+    if (prevState.contacts !== contacts) {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
     }
-  };
-
-  changeFilter = e => {
-    this.setState({ filter: e.currentTarget.value });
   };
   
   setMessage = (message) => {
@@ -84,18 +78,23 @@ class App extends Component {
     }
   };
   
-  deleteContact = (contactId) => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-    }))
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
   };
+  
+  deleteContact = (id) => {
+    const { contacts } = this.state
+    this.setState({ contacts: contacts.filter(e => e.id !== id) })
+  };
+
+  filterContacts = () => {
+    const {contacts, filter} = this.state;
+    return contacts.filter(e => e.name.toLowerCase().includes(filter.toLowerCase()))
+  }
 
   render() {
     const { contacts, filter, isVisible, message } = this.state;
-    const normalizedFilter = filter.toLowerCase();
-    const visibleContacts = this.state.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter),
-    );
+    const  visibleContacts = this.filterContacts()
 
     return(
       <div className="app">
@@ -114,7 +113,7 @@ class App extends Component {
           onSubmit={this.addContact}
           onSetMessage={this.setMessage}
         />
-        <CSSTransition in={contacts.length > 1}
+        <CSSTransition in={contacts.length > 0}
           timeout={250}
           classNames={popTransition}
           unmountOnExit>
