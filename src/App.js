@@ -29,13 +29,13 @@ class App extends Component {
   };
   
   componentDidMount() {
-    const parsedContacts= localStorage.getItem('contacts');
-    if (parsedContacts) {
-      this.setState({ contacts: JSON.parse(parsedContacts) });
+    const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
+    if (parsedContacts !== null) {
+      this.setState({ contacts: parsedContacts });
     }
   };
   
-  componentDidUpdate(prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const { contacts } = this.state;
     if (prevState.contacts !== contacts) {
     localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -82,19 +82,16 @@ class App extends Component {
     this.setState({ filter: e.currentTarget.value });
   };
   
-  deleteContact = (id) => {
-    const { contacts } = this.state
-    this.setState({ contacts: contacts.filter(e => e.id !== id) })
+  deleteContact = id => {
+    const { contacts } = this.state;
+    this.setState({ contacts: contacts.filter(contact => contact.id !== id) });
   };
-
-  filterContacts = () => {
-    const {contacts, filter} = this.state;
-    return contacts.filter(e => e.name.toLowerCase().includes(filter.toLowerCase()))
-  }
 
   render() {
     const { contacts, filter, isVisible, message } = this.state;
-    const  visibleContacts = this.filterContacts()
+    const filterContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase()),
+    );
 
     return(
       <div className="app">
@@ -113,7 +110,7 @@ class App extends Component {
           onSubmit={this.addContact}
           onSetMessage={this.setMessage}
         />
-        <CSSTransition in={contacts.length > 0}
+        <CSSTransition in={contacts.length > 1}
           timeout={250}
           classNames={popTransition}
           unmountOnExit>
@@ -122,14 +119,16 @@ class App extends Component {
             onChange={this.changeFilter}
           />
         </CSSTransition>
-        <ContactList
-          contacts={visibleContacts}
-          onDeleteContact={this.deleteContact}
-        />
+        {contacts.length > 0 && (
+          <ContactList
+            contacts={filterContacts}
+            onDeleteContact={this.deleteContact}
+          />
+        )}
       </div>
     );
-  };
-};
+  }
+}
 
 export default App;
 
