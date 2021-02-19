@@ -24,7 +24,7 @@ class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter: '',
+    filter: "",
     ...INITIAL_STATE,
   };
   
@@ -78,22 +78,29 @@ class App extends Component {
     }
   };
   
-  changeFilter = e => {
-    this.setState({ filter: e.currentTarget.value });
+  changeFilter = ({ target: { value } }) => {
+    this.setState({ filter: value });
   };
+
+  filterContacts = () => {
+    const { contacts, filter } = this.state;
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   
-  deleteContact = id => {
-    const { contacts } = this.state;
-    this.setState({ contacts: contacts.filter(contact => contact.id !== id) });
+
+  deleteContact = (id) => {
+    this.setState((state) => ({
+      contacts: state.contacts.filter((contact) => contact.id !== id),
+    }));
   };
 
   render() {
     const { contacts, filter, isVisible, message } = this.state;
-    const filterContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase()),
-    );
-
-    return(
+    
+    return (
       <div className="app">
         <CSSTransition in timeout={500} classNames={titleTransition} appear>
           <h1 className="title">Phonebook</h1>
@@ -115,16 +122,14 @@ class App extends Component {
           classNames={popTransition}
           unmountOnExit>
           <Filter
-            value={filter}
+            filter={filter}
             onChange={this.changeFilter}
           />
         </CSSTransition>
-        {contacts.length > 0 && (
           <ContactList
-            contacts={filterContacts}
+            contacts={this.filterContacts()}
             onDeleteContact={this.deleteContact}
           />
-        )}
       </div>
     );
   }

@@ -2,12 +2,13 @@ import React from 'react';
 import s from './Filter.module.css';
 import PropTypes from 'prop-types';
 
-const Filter = ({ value, onChange }) => (
+const Filter = ({ filter, onChange }) => (
     <div className={s.filter}>
         <label className={s.label} htmlFor="">Find contacts by name
             <input className={s.input}
                 type="text"
-                value={value}
+                name="filter"
+                value={filter}
                 onChange={onChange}
             />
         </label>
@@ -15,7 +16,7 @@ const Filter = ({ value, onChange }) => (
 );
 
 Filter.propTypes = {
-    value: PropTypes.string.isRequired,
+    filter: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired
 };
 
